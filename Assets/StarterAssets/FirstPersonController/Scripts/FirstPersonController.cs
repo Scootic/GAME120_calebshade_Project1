@@ -64,7 +64,7 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-	
+		private bool hasGun;
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
 #endif
@@ -108,13 +108,34 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+			hasGun = false;
 		}
 
 		private void Update()
 		{
+			//temp check to give gun, delete at earliest convenience (assuming this script goes anywhere)
+			if(hasGun == false && Input.GetKeyDown(KeyCode.R))
+			{
+				hasGun = true;
+			}
 			JumpAndGravity();
 			GroundedCheck();
 			Move();
+			ShootyMethod();
+			
+		}
+
+		private void ShootyMethod()
+		{
+			if(hasGun == true && _input.shoot)
+			{
+				Debug.Log("Gun Firing AF!");
+				_input.shoot = false;
+			}else if(hasGun == false && _input.shoot)
+			{
+				Debug.Log("Not American enough :(");
+				_input.shoot = false;
+			}
 		}
 
 		private void LateUpdate()

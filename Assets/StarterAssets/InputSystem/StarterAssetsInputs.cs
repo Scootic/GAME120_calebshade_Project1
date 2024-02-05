@@ -12,6 +12,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool jump;
 		public bool sprint;
+		public bool shoot;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -25,7 +26,10 @@ namespace StarterAssets
 		{
 			MoveInput(value.Get<Vector2>());
 		}
-
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
+		}
 		public void OnLook(InputValue value)
 		{
 			if(cursorInputForLook)
@@ -64,6 +68,11 @@ namespace StarterAssets
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
+		}
+
+		public void ShootInput(bool newShootState)
+		{
+			shoot = newShootState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)
