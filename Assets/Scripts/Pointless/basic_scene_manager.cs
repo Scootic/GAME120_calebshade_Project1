@@ -19,4 +19,9 @@ public class basic_scene_manager : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+    public void ExitApp()
+    {
+        Debug.Log("Closing Time!");
+        Application.Quit();
+    }
 }
